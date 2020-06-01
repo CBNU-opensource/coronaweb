@@ -18,6 +18,51 @@
         </ul>
     </nav>
     <div class="banner">
-        <p>이 페이지는 국내 지역별 관련</p>
+        <div>
+            <h3>{{today_date}}</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">지역</th>
+                    <th scope="col">전체 확진자 수</th>
+                    <th scope="col">전체 사망자 수</th>
+                    <th scope="col">전날대비 증감(확진자)</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {%for daily_data in today_list%}
+                        <tr>
+                            <th scope="row">{{daily_data.kr_region}}</th>
+                            <td>{{daily_data.kr_confirmed}}</td>
+                            <td>{{daily_data.kr_death}}</td>
+                            <td class="today">{{daily_data.kr_released}}</td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3>{{yesterday_date}}</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">지역</th>
+                    <th scope="col">전체 확진자 수</th>
+                    <th scope="col">전체 사망자 수</th>
+                    <th scope="col">치료중</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {%for daily_data in yesterday_list%}
+                        <tr>
+                            <th scope="row">{{daily_data.kr_region}}</th>
+                            <td>{{daily_data.kr_confirmed}}</td>
+                            <td>{{daily_data.kr_death}}</td>
+                            <td>{{daily_data.kr_released}}</td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>

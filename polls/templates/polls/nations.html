@@ -18,6 +18,107 @@
         </ul>
     </nav>
     <div class="banner">
-        <p>이 페이지는 해외 현황 관련</p>
+        {%if World_daily_data%}
+            <nav class="departure">
+                <ul>
+                    <li><a href="#today">{{today_date}}</a></li>
+                    <li><a href="#yesterday">{{yesterday_date}}</a></li>
+                    <li><a href="#b_yesterday">{{b_yesterday_date}}</a></li>
+                </ul>
+            </nav>
+            <div id="today">
+                <h3>{{today_date}}</h3>
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">국가</th>
+                        <th scope="col">날짜</th>
+                        <th scope="col">전체 확진자 수</th>
+                        <th scope="col">전날대비 증감(확진자)</th>
+                        <th scope="col">전체 사망자 수</th>
+                        <th scope="col">전날대비 증감(사망자)</th>
+                        <th scope="col">사망률</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for daily_data in World_daily_data%}
+                            {%if daily_data.world_today_date == today_date%}
+                            <tr>
+                                <th scope="row">{{daily_data.world_country}}</th>
+                                <td>{{daily_data.world_today_date}}</td>
+                                <td>{{daily_data.world_total_confirmed}}</td>
+                                <td>{{daily_data.world_new_cases}}</td>
+                                <td>{{daily_data.world_total_death}}</td>
+                                <td>{{daily_data.world_new_death}}</td>
+                                <td>{{daily_data.world_deaths_rate}}</td>
+                            </tr>
+                            {%endif%}
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <div id="yesterday">
+                <h3>{{yesterday_date}}</h3>
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">국가</th>
+                        <th scope="col">날짜</th>
+                        <th scope="col">전체 확진자 수</th>
+                        <th scope="col">전날대비 증감(확진자)</th>
+                        <th scope="col">전체 사망자 수</th>
+                        <th scope="col">전날대비 증감(사망자)</th>
+                        <th scope="col">사망률</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for daily_data in World_daily_data%}
+                            {%if daily_data.world_today_date == yesterday_date%}
+                            <tr>
+                                <th scope="row">{{daily_data.world_country}}</th>
+                                <td>{{daily_data.world_today_date}}</td>
+                                <td>{{daily_data.world_total_confirmed}}</td>
+                                <td>{{daily_data.world_new_cases}}</td>
+                                <td>{{daily_data.world_total_death}}</td>
+                                <td>{{daily_data.world_new_death}}</td>
+                                <td>{{daily_data.world_deaths_rate}}</td>
+                            </tr>
+                            {%endif%}
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <div id="b_yesterday">
+                <h3>{{b_yesterday_date}}</h3>
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">국가</th>
+                        <th scope="col">날짜</th>
+                        <th scope="col">전체 확진자 수</th>
+                        <th scope="col">전날대비 증감(확진자)</th>
+                        <th scope="col">전체 사망자 수</th>
+                        <th scope="col">전날대비 증감(사망자)</th>
+                        <th scope="col">사망률</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for daily_data in World_daily_data%}
+                            {%if daily_data.world_today_date == b_yesterday_date%}
+                            <tr>
+                                <th scope="row">{{daily_data.world_country}}</th>
+                                <td>{{daily_data.world_today_date}}</td>
+                                <td>{{daily_data.world_total_confirmed}}</td>
+                                <td>{{daily_data.world_new_cases}}</td>
+                                <td>{{daily_data.world_total_death}}</td>
+                                <td>{{daily_data.world_new_death}}</td>
+                                <td>{{daily_data.world_deaths_rate}}</td>
+                            </tr>
+                            {%endif%}
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+        {%endif%}
     </div>
 </body>

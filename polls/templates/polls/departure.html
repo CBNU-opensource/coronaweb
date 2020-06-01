@@ -20,13 +20,39 @@
     <div class="banner">
         <nav class="departure">
             <ul>
-                <li><a href="#available">입국 가능</a></li>
-                <li><a href="#unavailable">입국 불가</a></li>
+                <li><a href="#available">입국 가능(격리)</a></li>
+                <li><a href="#unavailable">입국 불가능</a></li>
+                <li><a href="#exception">제한적 입국 가능</a></li>
             </ul>
         </nav>
         {%if Country_departure%}
         <div id="available">
-            <h3>입국가능한 국가</h3>
+            <h3>입국 가능한 국가(격리)</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">국가</th>
+                    <th scope="col">관련정보</th>
+                    <th scope="col">안전수치</th>
+                    <th scope="col">입국가능여부</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {%for data in Country_departure%}
+                        {%if data.entrance == avail%}
+                            <tr>
+                                <th scope="row">{{data.name}}</th>
+                                <td>{{data.information}}</td>
+                                <td>{{data.safety}}</td>
+                                <td>{{data.entrance}}</td>
+                            </tr>
+                        {%endif%}
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        <div id="unavailable">
+            <h3>입국 불가능한 국가</h3>
             <table class="table">
                 <thead class="thead-dark">
                   <tr>
@@ -38,18 +64,42 @@
                 </thead>
                 <tbody>
                     {%for data in Country_departure%}
-                        <tr>
-                            <th scope="row">{{data.name}}</th>
-                            <td>{{data.information}}</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
+                        {%if data.entrance == unavail%}
+                            <tr>
+                                <th scope="row">{{data.name}}</th>
+                                <td>{{data.information}}</td>
+                                <td>{{data.safety}}</td>
+                                <td>{{data.entrance}}</td>
+                            </tr>
+                        {%endif%}
                     {%endfor%}
                 </tbody>
             </table>
         </div>
-        <div id="unavailable">
-            <p>불가능한 국가 목록입니다.</p>
+        <div id="exception">
+            <h3>제한적으로 입국 가능한 국가</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">나라명</th>
+                    <th scope="col">관련정보</th>
+                    <th scope="col">안전수치</th>
+                    <th scope="col">입국가능여부</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {%for data in Country_departure%}
+                        {%if data.entrance == exp%}
+                            <tr>
+                                <th scope="row">{{data.name}}</th>
+                                <td>{{data.information}}</td>
+                                <td>{{data.safety}}</td>
+                                <td>{{data.entrance}}</td>
+                            </tr>
+                        {%endif%}
+                    {%endfor%}
+                </tbody>
+            </table>
         </div>
         {%endif%}
     </div>
