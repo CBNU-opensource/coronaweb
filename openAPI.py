@@ -42,6 +42,7 @@ for i in range(len(countryData)) :
 #             print("--------"+str(i)+"번째 알림--------\n")
 #             print(contents)
 
+
 IDs =[]
 for i in range(len(countryData)):
     print("\n"+countryData[i]+"의 외국인 입국 관련 안내 사항입니다.\n")
