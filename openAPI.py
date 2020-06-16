@@ -1,5 +1,5 @@
-import xml.etree.ElementTree as ET
-import pandas as pd
+#import xml.etree.ElementTree as ET
+#import pandas as pd
 import sys
 from urllib.request import urlopen, Request
 
@@ -8,69 +8,48 @@ from urllib.parse import urlencode, quote_plus
 
 from bs4 import BeautifulSoup
 
+#db자동삽입용
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "OSproject.settings")
+import django
+django.setup()
+
+from corona.models import Country #모델 임포트
+
 api_key='Z1ghH%2Bq0HwropYoFYpaNT2OJis%2BBY%2Fz3LeC2HEMOJuTX6wfLmLrvIdVSaxW7hXADq%2Fw8rNuLZRRI9xL0bPG04A%3D%3D'
 api_key_decode=requests.utils.unquote(api_key)
 
+IDs=[] #id 담을 리스트 (내용중복방지)
+C_country={}
+
 url = 'http://apis.data.go.kr/1262000/SafetyNewsList/getCountrySafetyNewsList'
-queryparam = '?'+ urlencode({ quote_plus('ServiceKey') : api_key_decode, quote_plus('content') : '입국'})
 
-response = requests.get(url+queryparam)
-soup = BeautifulSoup(response.content, 'html.parser')
+def parse_api():
+    for k in range(1, 11):
+        queryparam = '?'+ urlencode({ quote_plus('ServiceKey') : api_key_decode, quote_plus('content') : '입국', quote_plus('numOfRows'):'150', quote_plus('pageNO'): str(k)})
 
-countryData=[]
-#IDs =[]
+        response = requests.get(url+queryparam)
+        soup = BeautifulSoup(response.content, 'html.parser')
 
-for items in soup.find_all('item') : 
-    #print(items)
-    country = items.find('countryname').text
-    if country not in countryData :
-        countryData.append(country)
-
-for i in range(len(countryData)) : 
-    print(countryData[i], end=" ")        
-
-# print("\n헝가리"+"의 외국인 입국 관련 안내 사항입니다.\n")
-# i=0
-# for items in soup.find_all('item') :
-#     country = items.find('countryname').text
-#     if country == "헝가리" : 
-#         id=items.find('id').text
-#         if id not in IDs :
-#             contents = items.find('content').text
-#             IDs.append(id)
-#             i=i+1
-#             print("--------"+str(i)+"번째 알림--------\n")
-#             print(contents)
-
-
-IDs =[]
-for i in range(len(countryData)):
-    print("\n"+countryData[i]+"의 외국인 입국 관련 안내 사항입니다.\n")
-    count=0
-    for items in soup.find_all('item') :
-        country = items.find('countryname').text
-        if country == countryData[i] : 
+        for items in soup.find_all('item') : #item 단락 파싱
             id=items.find('id').text
-            if id not in IDs :
-                contents = items.find('content').text
-                IDs.append(id)
-                count=count+1
-                print("--------"+str(count)+"번째 알림--------\n")
-                print(contents)
+            if id not in IDs:
+                IDs.append(id) #ID 리스트에 id삽입(같은내용 중복되지 않도록)
 
+                #한글+영어의 나라이름 파싱
+                Name=items.find('countryname').text
+                E_Name=items.find('countryenname').text
+                countryName=Name+"("+E_Name+")"
 
-# xtree = ET.fromstring(response)
-# xtree
+                #나라 입국 정보 파싱
+                infor=items.find('content').text
 
-# rows=[]
+                #각 나라 정보를 나타내는 딕셔너리에 삽입
+                C_country[countryName]=infor
+                        
+    return C_country
 
-# #iterate through each node of the tree
-# for node in xtree :
-#     n_title=node.find('코로나').text
-#     n_entrance = node.find('입국').text
-
-#     rows.append({'title': n_title, 'entrance' : n_entrance})
-
-# columns=['title', 'entrance']
-# infors = pd.DataFrame(rows, columns=columns)
-# infors.head(10)
+if __name__== '__main__':
+    country_data_dict=parse_api()
+    for n, i in country_data_dict.items():
+        Country(name=n, information=i).save()
