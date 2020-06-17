@@ -56,6 +56,7 @@ def nations(request):
 def departure(request):
     from polls.models import Country
 
+    """
     IDs=[] #id 담을 리스트 (내용중복방지)
     C_country={}
 
@@ -77,8 +78,17 @@ def departure(request):
                 E_Name=items.find('countryenname').text
                 countryName=Name+"("+E_Name+")"
                 infor=items.find('content').text
-                p=Country(name=countryName, information=infor, safety=0, entrance=0)
+
+                if countryName=="홍콩(중국)(China)"or countryName=="캄보디아(Cambodia)"or countryName=="영국(United Kingdom)" :
+                    p=Country(name=countryName, information=infor, safety=0, entrance="격리")                        
+                elif countryName=="미국(United States of America)":
+                    plus_infor="\n\n***14일 이내 중국, 이란, 유럽국가, 브라질을 방문/환승한 외국인 입국 금지***\n***괌, 하와이 입국은 격리***"
+                    p=Country(name=countryName, information=infor+plus_infor, safety=0, entrance="예외")                        
+                else:
+                    p=Country(name=countryName, information=infor, safety=0, entrance="불가능")
+
                 p.save()
+    """
 
     Country_departure=Country.objects.all()
     template = loader.get_template('polls/departure.html')
