@@ -1,0 +1,60 @@
+.title {
+    background-color: black;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.title h1 {
+    color:white;
+    font-size: 40px;
+    display: inline-block;
+}
+
+.title h2 {
+    color:white;
+    font-size: 15px;
+    display: inline-block;
+}
+
+.header {
+    font-family: "Arial", sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.25;
+    background-color:gold;
+    width: 100%;
+}
+  
+.header li {
+    display: inline-block;
+}
+
+.header a {
+    display: block;
+    color: black;
+    padding: 20px 20px;
+}
+
+.banner {
+    background-color: lavender;
+    padding: 100px 0;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+.departure {
+    text-align: left;
+    color: red;
+    font-size: 17px;
+}
+
+.banner h3 {
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
+  padding: 20px 20px;
+}

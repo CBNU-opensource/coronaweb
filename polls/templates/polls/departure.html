@@ -1,0 +1,56 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {%load static%}
+    <link rel='stylesheet' type='text/css' href="{% static 'polls/style.css'%}">
+</head>
+<body>
+    <div class="title">
+        <h1>출입국 허가</h1>
+        <h2>(COVID-19)</h2>
+    </div>
+    <nav class="header">
+        <ul>
+            <li><a href="/polls/main/">메인</a></li>
+            <li><a href="/polls/regions/">국내 지역별 현황</a></li>
+            <li><a href="/polls/nations/">해외 현황</a></li>
+            <li><a href="/polls/departure/">출입국 현황</a></li>
+        </ul>
+    </nav>
+    <div class="banner">
+        <nav class="departure">
+            <ul>
+                <li><a href="#available">입국 가능</a></li>
+                <li><a href="#unavailable">입국 불가</a></li>
+            </ul>
+        </nav>
+        {%if Country_departure%}
+        <div id="available">
+            <h3>입국가능한 국가</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">나라명</th>
+                    <th scope="col">관련정보</th>
+                    <th scope="col">안전수치</th>
+                    <th scope="col">입국가능여부</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {%for data in Country_departure%}
+                        <tr>
+                            <th scope="row">{{data.name}}</th>
+                            <td>{{data.information}}</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        <div id="unavailable">
+            <p>불가능한 국가 목록입니다.</p>
+        </div>
+        {%endif%}
+    </div>
+</body>
