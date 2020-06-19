@@ -4,11 +4,49 @@
     {%load static%}
     <link rel='stylesheet' type='text/css' href="{% static 'polls/style.css'%}">
     <script>
-        function myFunction() {
+        function Function1() {
   var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
+  input = document.getElementById("myInput1");
   filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
+  table = document.getElementById("myTable1");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+function Function2() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput2");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable2");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+function Function3() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput3");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable3");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
@@ -48,8 +86,8 @@
             </nav>
             <div id="today">
                 <h3>{{today_date}}</h3>
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Country" title="Type in a name">
-                <table id="myTable" class="table">
+                <input type="text" id="myInput1" onkeyup="Function1()" placeholder="Search for Country" title="Type in a name">
+                <table id="myTable1" class="table">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">국가</th>
@@ -80,8 +118,8 @@
             </div>
             <div id="yesterday">
                 <h3>{{yesterday_date}}</h3>
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Country" title="Type in a name">
-                <table id="myTable" class="table">
+                <input type="text" id="myInput2" onkeyup="Function2()" placeholder="Search for Country" title="Type in a name">
+                <table id="myTable2" class="table">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">국가</th>
@@ -112,8 +150,8 @@
             </div>
             <div id="b_yesterday">
                 <h3>{{b_yesterday_date}}</h3>
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Country" title="Type in a name">
-                <table id="myTable" class="table">
+                <input type="text" id="myInput3" onkeyup="Function3()" placeholder="Search for Country" title="Type in a name">
+                <table id="myTable3" class="table">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">국가</th>
@@ -149,4 +187,5 @@
     <p>개발진: 이진원, 이진서, 김주희, 김강민</p>
     <p>소속: 충북대학교</p>
     <p>충청북도 청주시 서원구 충대로 1</p>
+    <p>Update: 11am, 6pm</p>
 </footer>
