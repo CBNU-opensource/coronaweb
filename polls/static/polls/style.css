@@ -59,6 +59,24 @@
   padding: 20px 20px;
 }
 
-.today {
+#today {
+    font-weight: bold;
     color: red;
+}
+
+#region_table {
+    width: 50%;
+    display: inline-block;
+}
+
+#input-form {
+    color:black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+footer {
+    padding:20px;
+    background-color: gray;
+    text-align: center;
 }

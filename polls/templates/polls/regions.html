@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="title">
-        <h1>출입국 허가</h1>
+        <h1>Mapping Corona</h1>
         <h2>(COVID-19)</h2>
     </div>
     <nav class="header">
@@ -18,7 +18,7 @@
         </ul>
     </nav>
     <div class="banner">
-        <div>
+        <div id="region_table">
             <h3>{{today_date}}</h3>
             <table class="table">
                 <thead class="thead-dark">
@@ -35,13 +35,13 @@
                             <th scope="row">{{daily_data.kr_region}}</th>
                             <td>{{daily_data.kr_confirmed}}</td>
                             <td>{{daily_data.kr_death}}</td>
-                            <td class="today">{{daily_data.kr_released}}</td>
+                            <td id="today">{{daily_data.kr_released}}</td>
                         </tr>
                     {%endfor%}
                 </tbody>
             </table>
         </div>
-        <div>
+        <div id="region_table">
             <h3>{{yesterday_date}}</h3>
             <table class="table">
                 <thead class="thead-dark">
@@ -66,3 +66,8 @@
         </div>
     </div>
 </body>
+<footer>
+    <p>개발진: 이진원, 이진서, 김주희, 김강민</p>
+    <p>소속: 충북대학교</p>
+    <p>충청북도 청주시 서원구 충대로 1</p>
+</footer>
