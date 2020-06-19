@@ -58,3 +58,7 @@
   color: black;
   padding: 20px 20px;
 }
+
+.today {
+    color: red;
+}
