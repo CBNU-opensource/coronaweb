@@ -82,6 +82,10 @@ footer {
     text-align: center;
 }
 
+#blue {
+    color:blue;
+}
+
 #myInput1 {
     margin: 10px 10px;
 }
