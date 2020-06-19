@@ -3,6 +3,62 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     {%load static%}
     <link rel='stylesheet' type='text/css' href="{% static 'polls/style.css'%}">
+    <script>
+        function Function1() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput1");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable1");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    th = tr[i].getElementsByTagName("th")[0];
+    if (th) {
+      txtValue = th.textContent || th.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function Function2() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput2");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable2");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    th = tr[i].getElementsByTagName("th")[0];
+    if (th) {
+      txtValue = th.textContent || th.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function Function3() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput3");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable3");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    th = tr[i].getElementsByTagName("th")[0];
+    if (th) {
+      txtValue = th.textContent || th.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+    </script>
 </head>
 <body>
     <div class="title">
@@ -28,7 +84,8 @@
         {%if Country_departure%}
         <div id="available">
             <h3>입국 가능한 국가(격리)</h3>
-            <table class="table">
+            <input type="text" id="myInput1" onkeyup="Function1()" placeholder="Search for Country" title="Type in a name">
+            <table id="myTable1" class="table">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">국가</th>
@@ -42,7 +99,7 @@
                         {%if data.entrance == avail%}
                             <tr>
                                 <th scope="row">{{data.name}}</th>
-                                <td width=75%>{{data.information}}</td>
+                                <td width=80%>{{data.information}}</td>
                                 <td>{{data.safety}}</td>
                                 <td>{{data.entrance}}</td>
                             </tr>
@@ -53,7 +110,8 @@
         </div>
         <div id="unavailable">
             <h3>입국 불가능한 국가</h3>
-            <table class="table">
+            <input type="text" id="myInput2" onkeyup="Function2()" placeholder="Search for Country" title="Type in a name">
+            <table id="myTable2" class="table">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">나라명</th>
@@ -67,7 +125,7 @@
                         {%if data.entrance == unavail%}
                             <tr>
                                 <th scope="row">{{data.name}}</th>
-                                <td>{{data.information}}</td>
+                                <td width=80%>{{data.information}}</td>
                                 <td>{{data.safety}}</td>
                                 <td>{{data.entrance}}</td>
                             </tr>
@@ -78,7 +136,8 @@
         </div>
         <div id="exception">
             <h3>제한적으로 입국 가능한 국가</h3>
-            <table class="table">
+            <input type="text" id="myInput3" onkeyup="Function3()" placeholder="Search for Country" title="Type in a name">
+            <table id="myTable3" class="table">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">나라명</th>
@@ -92,7 +151,7 @@
                         {%if data.entrance == exp%}
                             <tr>
                                 <th scope="row">{{data.name}}</th>
-                                <td>{{data.information}}</td>
+                                <td width=80%>{{data.information}}</td>
                                 <td>{{data.safety}}</td>
                                 <td>{{data.entrance}}</td>
                             </tr>
@@ -108,4 +167,5 @@
     <p>개발진: 이진원, 이진서, 김주희, 김강민</p>
     <p>소속: 충북대학교</p>
     <p>충청북도 청주시 서원구 충대로 1</p>
+    <p>Update: 11am, 6pm</p>
 </footer>
