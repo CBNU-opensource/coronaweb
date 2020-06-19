@@ -3,10 +3,30 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     {%load static%}
     <link rel='stylesheet' type='text/css' href="{% static 'polls/style.css'%}">
+    <script>
+        function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+    </script>
 </head>
 <body>
     <div class="title">
-        <h1>출입국 허가</h1>
+        <h1>Mapping Corona</h1>
         <h2>(COVID-19)</h2>
     </div>
     <nav class="header">
@@ -28,7 +48,8 @@
             </nav>
             <div id="today">
                 <h3>{{today_date}}</h3>
-                <table class="table">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Country" title="Type in a name">
+                <table id="myTable" class="table">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">국가</th>
@@ -43,15 +64,15 @@
                     <tbody>
                         {%for daily_data in World_daily_data%}
                             {%if daily_data.world_today_date == today_date%}
-                            <tr>
-                                <th scope="row">{{daily_data.world_country}}</th>
-                                <td>{{daily_data.world_today_date}}</td>
-                                <td>{{daily_data.world_total_confirmed}}</td>
-                                <td>{{daily_data.world_new_cases}}</td>
-                                <td>{{daily_data.world_total_death}}</td>
-                                <td>{{daily_data.world_new_death}}</td>
-                                <td>{{daily_data.world_deaths_rate}}</td>
-                            </tr>
+                                <tr>
+                                    <td scope="row">{{daily_data.world_country}}</th>
+                                    <td>{{daily_data.world_today_date}}</td>
+                                    <td>{{daily_data.world_total_confirmed}}</td>
+                                    <td>{{daily_data.world_new_cases}}</td>
+                                    <td>{{daily_data.world_total_death}}</td>
+                                    <td>{{daily_data.world_new_death}}</td>
+                                    <td>{{daily_data.world_deaths_rate}}</td>
+                                </tr>
                             {%endif%}
                         {%endfor%}
                     </tbody>
@@ -59,7 +80,8 @@
             </div>
             <div id="yesterday">
                 <h3>{{yesterday_date}}</h3>
-                <table class="table">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Country" title="Type in a name">
+                <table id="myTable" class="table">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">국가</th>
@@ -75,7 +97,7 @@
                         {%for daily_data in World_daily_data%}
                             {%if daily_data.world_today_date == yesterday_date%}
                             <tr>
-                                <th scope="row">{{daily_data.world_country}}</th>
+                                <td scope="row">{{daily_data.world_country}}</th>
                                 <td>{{daily_data.world_today_date}}</td>
                                 <td>{{daily_data.world_total_confirmed}}</td>
                                 <td>{{daily_data.world_new_cases}}</td>
@@ -90,7 +112,8 @@
             </div>
             <div id="b_yesterday">
                 <h3>{{b_yesterday_date}}</h3>
-                <table class="table">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Country" title="Type in a name">
+                <table id="myTable" class="table">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">국가</th>
@@ -106,7 +129,7 @@
                         {%for daily_data in World_daily_data%}
                             {%if daily_data.world_today_date == b_yesterday_date%}
                             <tr>
-                                <th scope="row">{{daily_data.world_country}}</th>
+                                <td scope="row">{{daily_data.world_country}}</th>
                                 <td>{{daily_data.world_today_date}}</td>
                                 <td>{{daily_data.world_total_confirmed}}</td>
                                 <td>{{daily_data.world_new_cases}}</td>
@@ -122,3 +145,8 @@
         {%endif%}
     </div>
 </body>
+<footer>
+    <p>개발진: 이진원, 이진서, 김주희, 김강민</p>
+    <p>소속: 충북대학교</p>
+    <p>충청북도 청주시 서원구 충대로 1</p>
+</footer>

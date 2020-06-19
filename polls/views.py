@@ -42,17 +42,11 @@ def main(request):
 
 
 def regions(request):
-    
     from polls.models import kr_region
-
+    """
     url='https://raw.githubusercontent.com/jooeungen/coronaboard_kr/master/kr_regional_daily.csv' 
     c= requests.get(url).content
     s=pd.read_csv(io.StringIO(c.decode('utf-8'))) #지역별 코로나 확진자
-
-    t = datetime.datetime.today()
-    yesterday=t - timedelta(days=1)
-    today_date=time.strftime('%Y-%m-%d', time.localtime(time.time()))
-    yesterday_date=yesterday.strftime('%Y-%m-%d')
     
     kr_regional_list=kr_region.objects.all()
     kr_regional_list.delete()
@@ -60,6 +54,11 @@ def regions(request):
     for data in s.values:
         p=kr_region(kr_date=data[0], kr_region=data[1], kr_confirmed=data[2], kr_death=data[3], kr_released=data[4])
         p.save()
+    """
+    t = datetime.datetime.today()
+    yesterday=t - timedelta(days=1)
+    today_date=time.strftime('%Y-%m-%d', time.localtime(time.time()))
+    yesterday_date=yesterday.strftime('%Y-%m-%d')
 
     kr_regional_list=kr_region.objects.all() #국내 지역별 현황
     obj_num=kr_region.objects.all().count() 
@@ -88,7 +87,7 @@ def regions(request):
 
 def nations(request):
     from polls.models import World_daily
-
+    """
     worlddaily_list=World_daily.objects.all()
     worlddaily_list.delete()
 
@@ -97,11 +96,13 @@ def nations(request):
     s=pd.read_csv(io.StringIO(c.decode('utf-8')))
 
     t = datetime.datetime.today()
-    b_yesterday=t - timedelta(days=2)
-    yesterday=t - timedelta(days=1)
-    today_date=time.strftime('%Y-%m-%d', time.localtime(time.time()))
+    b_yesterday=t - timedelta(days=3)
+    yesterday=t - timedelta(days=2)
+    today=t - timedelta(days=1)
     yesterday_date=yesterday.strftime('%Y-%m-%d')
     b_yesterday_date=b_yesterday.strftime('%Y-%m-%d')
+    today_date=today.strftime('%Y-%m-%d')
+
 
     for data in s.values:
         if today_date==data[3]:
@@ -113,6 +114,15 @@ def nations(request):
         elif b_yesterday_date==data[3]:
             p=World_daily(world_country=data[2], world_today_date=data[3], world_total_confirmed=data[4], world_new_cases=data[5], world_total_death=data[6], world_new_death=data[7], world_deaths_rate=data[10])
             p.save()
+    """
+
+    t = datetime.datetime.today()
+    b_yesterday=t - timedelta(days=3)
+    yesterday=t - timedelta(days=2)
+    today=t - timedelta(days=1)
+    yesterday_date=yesterday.strftime('%Y-%m-%d')
+    b_yesterday_date=b_yesterday.strftime('%Y-%m-%d')
+    today_date=today.strftime('%Y-%m-%d')
 
     World_daily_data=World_daily.objects.all()
 

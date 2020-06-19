@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="title">
-        <h1>출입국 허가</h1>
+        <h1>Mapping Corona</h1>
         <h2>(COVID-19)</h2>
     </div>
     <nav class="header">
@@ -42,7 +42,7 @@
                         {%if data.entrance == avail%}
                             <tr>
                                 <th scope="row">{{data.name}}</th>
-                                <td>{{data.information}}</td>
+                                <td width=75%>{{data.information}}</td>
                                 <td>{{data.safety}}</td>
                                 <td>{{data.entrance}}</td>
                             </tr>
@@ -104,3 +104,8 @@
         {%endif%}
     </div>
 </body>
+<footer>
+    <p>개발진: 이진원, 이진서, 김주희, 김강민</p>
+    <p>소속: 충북대학교</p>
+    <p>충청북도 청주시 서원구 충대로 1</p>
+</footer>
