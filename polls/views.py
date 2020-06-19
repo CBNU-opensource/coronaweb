@@ -123,7 +123,7 @@ def nations(request):
     yesterday_date=yesterday.strftime('%Y-%m-%d')
     b_yesterday_date=b_yesterday.strftime('%Y-%m-%d')
     today_date=today.strftime('%Y-%m-%d')
-
+    
     World_daily_data=World_daily.objects.all()
 
     template = loader.get_template('polls/nations.html')
