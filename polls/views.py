@@ -18,8 +18,8 @@ from datetime import timedelta
 def main(request):
     from polls.models import krdaily
     
-    url='https://raw.githubusercontent.com/jooeungen/coronaboard_kr/master/kr_daily.csv'
-    c=requests.get(url).content
+    url='https://raw.githubusercontent.com/jooeungen/coronaboard_kr/master/kr_daily.csv'        #csv파일을 읽어오기 위한 url저장
+    c=requests.get(url).content     #url
     s=pd.read_csv(io.StringIO(c.decode('utf-8')))
     
     krdaily_list=krdaily.objects.all()
@@ -43,7 +43,7 @@ def main(request):
 
 def regions(request):
     from polls.models import kr_region
-    """
+    
     url='https://raw.githubusercontent.com/jooeungen/coronaboard_kr/master/kr_regional_daily.csv' 
     c= requests.get(url).content
     s=pd.read_csv(io.StringIO(c.decode('utf-8'))) #지역별 코로나 확진자
@@ -54,7 +54,7 @@ def regions(request):
     for data in s.values:
         p=kr_region(kr_date=data[0], kr_region=data[1], kr_confirmed=data[2], kr_death=data[3], kr_released=data[4])
         p.save()
-    """
+    
     t = datetime.datetime.today()
     yesterday=t - timedelta(days=1)
     today_date=time.strftime('%Y-%m-%d', time.localtime(time.time()))
@@ -87,7 +87,7 @@ def regions(request):
 
 def nations(request):
     from polls.models import World_daily
-    """
+    
     worlddaily_list=World_daily.objects.all()
     worlddaily_list.delete()
 
@@ -123,7 +123,7 @@ def nations(request):
     yesterday_date=yesterday.strftime('%Y-%m-%d')
     b_yesterday_date=b_yesterday.strftime('%Y-%m-%d')
     today_date=today.strftime('%Y-%m-%d')
-    
+    """
     World_daily_data=World_daily.objects.all()
 
     template = loader.get_template('polls/nations.html')
@@ -139,7 +139,7 @@ def nations(request):
 
 def departure(request):
     from polls.models import Country, World_daily
-    """
+    
     IDs=[] #id 담을 리스트 (내용중복방지)
     C_country={}
 
@@ -172,7 +172,7 @@ def departure(request):
                 else:
                     p=Country(name=countryName, information=infor, safety=5, entrance="불가능")
                     p.save()
-    """    
+        
 
     Country_departure=Country.objects.all()
     template = loader.get_template('polls/departure.html')
